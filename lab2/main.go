@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 )
@@ -31,7 +30,7 @@ func romanToInt(s string) int {
 
 func main() {
 	romanHandler := http.HandlerFunc(romanHandler)
-	http.Handle("/employee", romanHandler)
+	http.Handle("/task2", romanHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
@@ -44,7 +43,6 @@ func romanHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	roman := r.Form["roman"]
 	var res int = romanToInt(roman[0])
-	fmt.Printf("Roman : %s, Int : %d", roman, res)
 	w.WriteHeader(200)
 	w.Write([]byte(strconv.Itoa(res)))
 
